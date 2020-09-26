@@ -1,0 +1,30 @@
+{
+  "name": "dlt-oracle",
+  "version": "0.0.1",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {},
+  "scripts": {
+    "migrate": "./node_modules/.bin/truffle migrate",
+    "debug": "./node_modules/.bin/truffle debug",
+    "compile": "./node_modules/.bin/truffle compile",
+    "exec": "./node_modules/.bin/truffle exec",
+    "test": "./node_modules/.bin/truffle test"
+  },
+  "dependencies": {
+    "chainlink": "0.8.2",
+    "openzeppelin-solidity": "^1.12.0"
+  },
+  "devDependencies": {
+    "bn.js": "^4.11.8",
+    "eslint": "^6.1.0",
+    "ethereumjs-abi": "^0.6.6",
+    "ethereumjs-util": "^6.1.0",
+    "prettier": "2.0.5",
+    "solium": "1.2.5",
+    "solium-plugin-zeppelin": "0.0.2",
+    "truffle": "^5.0.4",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.5",
+    "web3": "1.2.0"
+  }
+}

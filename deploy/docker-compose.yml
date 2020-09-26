@@ -1,0 +1,46 @@
+version: "3.6"
+services:
+  chainlink:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chainlink
+    restart: on-failure
+    ports:
+      - "6688:6688"
+    depends_on:
+      - postgres
+    secrets:
+      - node_password
+      - apicredentials
+    env_file:
+      - ./chainlink.env
+    environment:
+      - DATABASE_URL=postgresql://chainlink@postgres:5432/chainlink?sslmode=disable
+    volumes:
+      - "cl:/chainlink"
+    networks:
+      - integration
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: on-failure
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=chainlink
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - "./scripts:/docker-entrypoint-initdb.d"
+      - "pg:/var/lib/postgresql/data"
+    networks:
+      - integration
+volumes:
+  pg:
+  cl:
+secrets:
+  node_password:
+    file: ./secrets/password
+  apicredentials:
+    file: ./secrets/apicredentials
+networks:
+  integration:
+    name: integration
